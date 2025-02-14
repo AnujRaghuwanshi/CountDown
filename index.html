@@ -207,6 +207,12 @@
                 card.classList.remove("open");
             }, 5000);
         }
+             document.addEventListener("click", () => {
+    let audio = document.getElementById("valentine-song");
+    audio.volume = 1.0;
+    audio.muted = false;
+    audio.play().catch(error => console.log("Audio Play Error:", error));
+});
     </script>
      
 </body>
