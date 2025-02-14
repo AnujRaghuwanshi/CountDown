@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Countdown</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebee;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            position: absolute;
+            top: 10px;
+            font-size: 32px;
+        }
+        .heart {
+            position: relative;
+            width: 600px;
+            height: 550px;
+            background-color: red;
+            clip-path: path("M 300,60 C 480,-100 780,120 300,550 C -180,120 120,-100 300,60 Z");
+            display: grid;
+            grid-template-columns: repeat(7, 2fr);
+            grid-template-rows: repeat(7, 2fr);
+            gap: 1px;
+            overflow: hidden;
+            padding: 5px;
+            top: 35px;
+        }
+        .heart img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #countdown {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .falling-heart {
+            position: absolute;
+            top: -50px;
+            color: red;
+            font-size: 24px;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .card {
+            position: absolute;
+            width: 100px;
+            height: 120px;
+            background-color: pink;
+            border: 2px solid red;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.5s, background-color 0.5s, box-shadow 0.3s;
+            border-radius: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            perspective: 1000px;
+        }
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .card.open {
+            background-color: white;
+        }
+        .card-content {
+            display: none;
+        }
+        .click-me {
+            display: block;
+        }
+        .card.open .card-content {
+            display: block;
+        }
+        .card.open .click-me {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day, My Love! ❤️</h1>
+    <div class="heart" id="heart-container"></div>
+    <p id="countdown"></p>
+
+    <div class="card" style="top: 200px; left: 50px;" onclick="toggleCard(this)">
+        <p class="click-me">💌 Click Me</p>
+        <div class="card-content">I Love You ❤️</div>
+    </div>
+    <div class="card" style="top: 400px; right: 50px;" onclick="toggleCard(this)">
+        <p class="click-me">💌 Click Me</p>
+        <div class="card-content">Forever Together 💕</div>
+    </div>
+    <div class="card" style="top: 400px; left: 120px;" onclick="toggleCard(this)">
+        <p class="click-me">💌 Click Me</p>
+        <div class="card-content">Be Mine❤️</div>
+    </div>
+    <div class="card" style="top: 200px; right: 120px;" onclick="toggleCard(this)">
+        <p class="click-me">💌 Click Me</p>
+        <div class="card-content">You are so special to me💕</div>
+    </div>
+    <audio id="valentine-song" autoplay loop>
+        <source src="anaya/128-Sooiyan - Guddu Rangeela 128 Kbps.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("January 27, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =`<strong>It's been: ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</strong><br><strong>Come Soon Babe❤️</strong>`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function loadImages() {
+            const imageUrls = [
+                "anaya/865c88f132a204196b5e4cbafab8bbb2.jpg",
+                "anaya/e2e02322195281c6b351eb84190f5a20.jpg",
+                // "anaya/d98b827441947c56854df1950c6303a6.jpg",
+                "anaya/Snapchat-2143514473.jpg",
+                // "anaya/Snapchat-2122032473.jpg",
+                // "anaya/Snapchat-2052880277.jpg",
+                "anaya/Snapchat-1901451072.jpg",
+                "anaya/Snapchat-2047533504.jpg",
+                // "anaya/Snapchat-1994306762.jpg",
+                "anaya/Snapchat-1813412621.jpg",
+                // "anaya/Snapchat-1751182389.jpg",
+                // "anaya/Snapchat-1245079968.jpg",
+                "anaya/IMG_20231006_215143.jpg",
+                "anaya/Snapchat-1506162885.jpg",
+                "anaya/Snapchat-765531330.jpg",
+                "anaya/Snapchat-511964000.jpg",
+                "anaya/Snapchat-445249971.jpg",
+                "anaya/Persona_20240420_143539.jpg",
+                "anaya/IMG20240609145737.jpg",
+                "anaya/IMG_20240105_005122_731.webp",
+                "anaya/IMG-20240405-WA0030.jpg",
+                "anaya/IMG-20240405-WA0032_1.jpg",
+                "anaya/IMG-20240405-WA0033.jpg",
+                "anaya/IMG20240609112342.jpg",
+                "anaya/Snapchat-445249971.jpg",
+                "anaya/Snapchat-1015195812.jpg",
+                "anaya/Snapchat-1433621899.jpg",
+                "anaya/Snapchat-1506162885.jpg",
+                "anaya/Snapchat-2047533504.jpg",
+                "anaya/Snapchat-2143514473.jpg",
+                "anaya/Snapchat-2143514473.jpg",
+                "anaya/Snapchat-1506162885.jpg",
+                // "anaya/IMG20240609145638.jpg",
+                // "anaya/IMG20240405164500.jpg",
+                // "anaya/IMG20240405115621.jpg",
+                // "anaya/IMG20240104161930.jpg",
+                // "anaya/IMG_20231211_21025607.jpeg",
+                // "anaya/IMG20240405164459.jpg",
+                // "anaya/IMG20240609112339.jpg",
+                // "anaya/IMG20240406163511.jpg",
+            ];
+            const heartContainer = document.getElementById("heart-container");
+            heartContainer.innerHTML = "";
+            imageUrls.forEach(url => {
+                let img = document.createElement("img");
+                img.src = url;
+                heartContainer.appendChild(img);
+            });
+        }
+        loadImages();
+
+        function createFallingHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("falling-heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+        createFallingHearts();
+        function toggleCard(card) {
+            card.classList.add("open");
+            setTimeout(() => {
+                card.classList.remove("open");
+            }, 5000);
+        }
+    </script>
+     
+</body>
+</html> 
+
+
+
